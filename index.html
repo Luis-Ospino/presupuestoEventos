@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presupuesto de eventos</title>
+</head>
+<body>
+    <script>
+        let vectorObjetos = [];
+        let posicionesVector = Number(prompt(`A cuantos eventos desea asistir: `));
+        let tiempoTotal = 0;
+        let totalCompra = 0;
+        for(let i=0; i<posicionesVector; i++){
+            let objetoEventos = {};
+            objetoEventos.Nombre = prompt(`Ingrese el nombre del evento ${i+1}:`);
+            objetoEventos.Entradas = Number(prompt(`Ingrese el número de boletas:`));
+            objetoEventos.Precio = Number(prompt(`Ingrese el precio de la entrada:`));
+            objetoEventos.Duracion = Number(prompt(`Ingrese el tiempo en horas del evento ${i+1}:`));
+            tiempoTotal = tiempoTotal + objetoEventos.Duracion;
+            objetoEventos.Subtotal = objetoEventos.Entradas * objetoEventos.Precio;
+            totalCompra += objetoEventos.Subtotal;
+            objetoEventos.Tiempo = objetoEventos.Entradas * objetoEventos.Duracion;
+            vectorObjetos.push(objetoEventos);
+        }
+        console.log(tiempoTotal);
+        console.log(totalCompra);
+
+        for(let posicion of vectorObjetos){
+            for(let clave in posicion){
+                document.write(`${clave}: ${posicion[clave]} <br>`)
+            }
+            document.write(`-------------------------------<br>`)
+        }
+
+        if(tiempoTotal > 10){
+            document.write(`advertencia tu tiempo es de: ${tiempoTotal} ¿estás seguro de tantas horas? <br>`);
+        }else{
+           document.write(`que disfrutes tus eventos con una duración de: ${tiempoTotal} horas <br>`);
+        }
+
+        if(totalCompra > 500000){
+            let descuento = totalCompra*0.1;
+            totalCompra = totalCompra - descuento;
+            document.write(`Felicidades tienes un descuento de: $${descuento} <br> y tu total a pagar menos el descuento es de: $${totalCompra} <br>`)
+        }else{
+            document.write(`Lo sentimos, No tienes descuento y tu total a pagar es de: $${totalCompra}`);
+        }
+        
+    </script>
+</body>
+</html>
